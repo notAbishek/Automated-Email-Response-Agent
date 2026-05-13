@@ -1,7 +1,7 @@
 # Email Triage Agent (LangGraph)
 
 This project is a small demo of an email triage workflow built with LangGraph
-and Google Gemini. It classifies incoming support emails and generates an
+and Sarvam AI. It classifies incoming support emails and generates an
 auto-reply based on the route.
 
 ## What this does
@@ -28,10 +28,10 @@ Nodes in the graph:
 	- Windows: `python -m venv myenv` then `myenv\Scripts\activate`
 	- macOS/Linux: `python -m venv myenv` then `source myenv/bin/activate`
 2. Install dependencies.
-	- `pip install langchain-google-genai langgraph langchain-core pydantic`
+	- `pip install langchain-sarvam-ai langgraph langchain-core pydantic`
 3. Set your API key (either option works).
 	- Create a `.env` file:
-	  - `GOOGLE_API_KEY=your_key_here`
+	  - `SARVAM_API_KEY=your_key_here`
 	- Or export it in your shell before running.
 4. Run the demo.
 	- `python main.py`

@@ -2,14 +2,14 @@ import asyncio
 import os
 from typing import Literal, Optional, TypedDict
 
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_sarvam_ai import ChatSarvamAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 from pydantic import BaseModel, Field
 
-llm: Optional[ChatGoogleGenerativeAI] = None
+llm: Optional[ChatSarvamAI] = None
 classifier = None
 
 
@@ -230,7 +230,8 @@ class Classification(BaseModel):
 def init_llm_and_classifier() -> None:
     global llm, classifier
     if llm is None:
-        llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite-preview")
+        # Structured output is supported on sarvam-30b and sarvam-105b.
+        llm = ChatSarvamAI(model="sarvam-30b")
         classifier = llm.with_structured_output(Classification)
 
 
@@ -489,8 +490,8 @@ async def run_demo(app) -> None:
 
 def main():
     load_env_file()
-    if not os.getenv("GOOGLE_API_KEY"):
-        print("Set GOOGLE_API_KEY before running.")
+    if not os.getenv("SARVAM_API_KEY"):
+        print("Set SARVAM_API_KEY before running.")
         return
 
     init_llm_and_classifier()
